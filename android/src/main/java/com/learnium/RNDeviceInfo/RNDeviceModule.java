@@ -543,16 +543,7 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
 
   @ReactMethod(isBlockingSynchronousMethod = true)
   public boolean hasHmsSync() {
-    try {
-      Class<?> huaweiApiAvailability = Class.forName("com.huawei.hms.api.HuaweiApiAvailability");
-      Method getInstanceMethod = huaweiApiAvailability.getMethod("getInstance");
-      Object hmsObject = getInstanceMethod.invoke(null);
-      Method isHuaweiMobileServicesAvailableMethod = hmsObject.getClass().getMethod("isHuaweiMobileServicesAvailable", Context.class);
-      int isHMS = (int) isHuaweiMobileServicesAvailableMethod.invoke(hmsObject, getReactApplicationContext());
-      return isHMS == 0; // ConnectionResult.SUCCESS
-    } catch (Exception e) {
-      return false;
-    }
+    return false;
   }
   @ReactMethod
   public void hasHms(Promise p) { p.resolve(hasHmsSync()); }
